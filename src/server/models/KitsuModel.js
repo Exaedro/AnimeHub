@@ -7,8 +7,12 @@ class KitsuModel {
      * @param {string} url - Kitsu API url
     */
     static async getAll()  {
-        const data = (await fetch(`${API_URL}?page[limit]=5`)).json()
-        return data
+        try {
+            const data = (await fetch(`${API_URL}?page[limit]=5`)).json()
+            return data
+        } catch(e) {
+            console.error('Error has ocurred')
+        }
     }
     
     /**
@@ -17,8 +21,12 @@ class KitsuModel {
     static async getByTitle({ title } = {}) {
         if(!typeof title == 'string') throw Error('Title has be a string')
 
-        const data = (await fetch(`${API_URL}?filter[text]=${title}`)).json()
-        return data
+        try {
+            const data = (await fetch(`${API_URL}?filter[text]=${title}`)).json()
+            return data
+        } catch(e) {
+            console.error('Error has ocurred')
+        }
     }
 }
 
